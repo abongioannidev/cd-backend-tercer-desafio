@@ -38,6 +38,11 @@ router.get("/:pid", async (req, res) => {
 app.use("/products", router);
 
 const server = app.listen(PORT, async () => {
+  await initializeData();
+  console.log(`app listening ons port ${server.address().port}`);
+});
+
+const initializeData = async () => {
   const nameProducts = [
     "Lavadora",
     "Refrigerador",
@@ -68,6 +73,4 @@ const server = app.listen(PORT, async () => {
     );
     await productManager.addProduct(prodcut);
   }
-
-  console.log(`app listening ons port ${server.address().port}`);
-});
+};
