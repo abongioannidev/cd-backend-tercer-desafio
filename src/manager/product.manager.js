@@ -18,32 +18,21 @@ export class ProductManager {
   }
 
   async getProductById(id) {
-    try {
-      return await this.repository.getElementById(id);
-    } catch (error) {
-      return error.message;
-    }
+    return await this.repository.getElementById(id);
   }
 
   async deleteProductById(id) {
-    try {
-      await this.repository.deleteElementById(id);
-      return `product with id ${id} has been deleted`;
-    } catch (error) {
-      return error.message;
-    }
+    await this.repository.deleteElementById(id);
+    return `product with id ${id} has been deleted`;
   }
 
   async updateProduct(id, product) {
     this.#validateInstance(product);
     this.#validateFieldCode(product);
-    try {
-      const object = this.#productToObject(product);
-      await this.repository.updateElement(id, object);
-      return `product with id ${id} has been updated`;
-    } catch (error) {
-      return error.message;
-    }
+
+    const object = this.#productToObject(product);
+    await this.repository.updateElement(id, object);
+    return `product with id ${id} has been updated`;
   }
 
   async #validateFieldCode(product) {

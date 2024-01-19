@@ -30,9 +30,12 @@ router.get("/", async (req, res) => {
 router.get("/:pid", async (req, res) => {
   const { pid } = req.params;
   const id = Number(pid);
-  let product = await productManager.getProductById(id);
-
-  res.status(200).send(product);
+  try {
+    let product = await productManager.getProductById(id);
+    res.status(200).send(product);
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
 });
 
 app.use("/products", router);
